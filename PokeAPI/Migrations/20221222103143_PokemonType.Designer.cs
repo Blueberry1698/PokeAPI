@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PokeAPI.Services;
 
@@ -11,9 +12,11 @@ using PokeAPI.Services;
 namespace PokeAPI.Migrations
 {
     [DbContext(typeof(PokemonContext))]
-    partial class PokemonContextModelSnapshot : ModelSnapshot
+    [Migration("20221222103143_PokemonType")]
+    partial class PokemonType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,17 +37,12 @@ namespace PokeAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("Type1TypeID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Type2TypeID")
+                    b.Property<int?>("TypeID")
                         .HasColumnType("int");
 
                     b.HasKey("PokemonID");
 
-                    b.HasIndex("Type1TypeID");
-
-                    b.HasIndex("Type2TypeID");
+                    b.HasIndex("TypeID");
 
                     b.ToTable("Pokemon");
                 });
@@ -68,17 +66,11 @@ namespace PokeAPI.Migrations
 
             modelBuilder.Entity("PokeAPI.Models.Pokemon", b =>
                 {
-                    b.HasOne("PokeAPI.Models.Type", "Type1")
+                    b.HasOne("PokeAPI.Models.Type", "Type")
                         .WithMany()
-                        .HasForeignKey("Type1TypeID");
+                        .HasForeignKey("TypeID");
 
-                    b.HasOne("PokeAPI.Models.Type", "Type2")
-                        .WithMany()
-                        .HasForeignKey("Type2TypeID");
-
-                    b.Navigation("Type1");
-
-                    b.Navigation("Type2");
+                    b.Navigation("Type");
                 });
 #pragma warning restore 612, 618
         }
