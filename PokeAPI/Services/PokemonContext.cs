@@ -10,5 +10,6 @@ namespace PokeAPI.Services
 
         }
         public DbSet<Pokemon> Pokemon { get; set; }
+        public DbSet<Types> Types { get; set; }
     }
 }
