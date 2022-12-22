@@ -1,6 +1,4 @@
-﻿using Azure.Core;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using PokeAPI.Models;
 
 namespace PokeAPI.Controllers
@@ -27,7 +25,7 @@ namespace PokeAPI.Controllers
         {
             var dbPokemon = await _context.Pokemon.FindAsync(id);
             if (dbPokemon == null)
-                return BadRequest("Pokemon not found.");
+                return NotFound("Pokemon not found.");
             return Ok(dbPokemon);
         }
 
@@ -45,7 +43,7 @@ namespace PokeAPI.Controllers
         {
             var dbPokemon = await _context.Pokemon.FindAsync(request.PokemonID);
             if (dbPokemon == null)
-                return BadRequest("Pokemon not found.");
+                return NotFound("Pokemon not found.");
 
             dbPokemon.PokemonID = request.PokemonID;
             dbPokemon.PokemonName = request.PokemonName;
