@@ -3,9 +3,9 @@ using PokeAPI.Models;
 
 namespace PokeAPI.Services
 {
-    public class PokemonContext : DbContext
+    public class DataContext : DbContext
     {
-        public PokemonContext(DbContextOptions<PokemonContext> options) : base(options)
+        public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
 
         }

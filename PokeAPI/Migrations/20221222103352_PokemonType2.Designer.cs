@@ -11,7 +11,7 @@ using PokeAPI.Services;
 
 namespace PokeAPI.Migrations
 {
-    [DbContext(typeof(PokemonContext))]
+    [DbContext(typeof(DataContext))]
     [Migration("20221222103352_PokemonType2")]
     partial class PokemonType2
     {

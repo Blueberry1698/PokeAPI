@@ -7,9 +7,9 @@ namespace PokeAPI.Controllers
     [ApiController]
     public class PokemonController : ControllerBase
     {
-        private PokemonContext _context;
+        private DataContext _context;
 
-        public PokemonController(PokemonContext context)
+        public PokemonController(DataContext context)
         {
             _context = context;
         }

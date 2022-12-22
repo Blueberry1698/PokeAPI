@@ -10,7 +10,7 @@ using PokeAPI.Services;
 
 namespace PokeAPI.Migrations
 {
-    [DbContext(typeof(PokemonContext))]
+    [DbContext(typeof(DataContext))]
     [Migration("20221221104257_CreateInitial")]
     partial class CreateInitial
     {
