@@ -17,13 +17,13 @@ namespace PokeAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Pokemon>>> GetAllPokemon()
         {
-            return Ok(await _context.Pokemon.ToListAsync());
+            return Ok(await _context.Pokemon.Include(ptype => ptype.Type1).Include(ptype => ptype.Type2).ToListAsync());
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Pokemon>> GetSinglePokemon(int id)
         {
-            var dbPokemon = await _context.Pokemon.FindAsync(id);
+            var dbPokemon = await _context.Pokemon.Include(ptype => ptype.Type1).Include(ptype => ptype.Type2).FirstAsync(p => p.PokemonID == id);
             if (dbPokemon == null)
                 return NotFound("Pokemon not found.");
             return Ok(dbPokemon);
@@ -47,6 +47,8 @@ namespace PokeAPI.Controllers
 
             dbPokemon.PokemonID = request.PokemonID;
             dbPokemon.PokemonName = request.PokemonName;
+            dbPokemon.Type1 = request.Type1;
+            dbPokemon.Type2 = request.Type2;
 
             await _context.SaveChangesAsync();
 
